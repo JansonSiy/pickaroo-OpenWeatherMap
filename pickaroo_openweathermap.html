@@ -10,7 +10,7 @@
 <body>
     <h1>Show the 7 day weather forecast for Manila</h1>
 
-    <h2>Instructions</h2>
+    <h3>Instructions</h3>
 
     <p>
         1. Use the API provided by http://openweathermap.org<br>
@@ -18,10 +18,16 @@
         3. You don't need to have a paid OpenWeatherMap account to finish this test.
     </p>
 
-    <h2>Date Today: <span id='displayDate'></span></h2>
+    <h2>Today: <span id='displayDate'></span></h2>
 
-    <h3>Weather Forecast (7 days)</h3>
-    
- 
+    <table>
+        <thead>
+            <tr>
+                <td>Weather Forecast:</td>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+        </tbody>
+    </table> 
 </body>
 </html>
