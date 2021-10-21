@@ -79,7 +79,11 @@ function currentDate() {
 
             let rowTemplate = 
             `<tr>
-                <td>${newDay}, ${date} ${updatedMonth} ${year}: ${dailyTemp}℃</td>
+                <td>${newDay},</td>
+                <td>${date}</td>
+                <td>${updatedMonth}</td>
+                <td>${year}:</td>
+                <td>${dailyTemp}℃</td>
             </tr>`;
 
             tableBody.innerHTML = tableBody.innerHTML + rowTemplate;
