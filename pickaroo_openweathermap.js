@@ -1,23 +1,22 @@
-// onload currentDate()
-window.onload = currentDate();
-// window.onload = forecast();
+// onload function
+window.onload = forecast();
 
-function currentDate() {
+function forecast() {
+    // STEP 1 - Getting the current date
     let currentDate = new Date();
     // console.log(currentDate)
-    // Thu Oct 21 2021 21:26:16 GMT+0800 (Philippine Standard Time)
+
     let day = currentDate.getDay();
     // console.log(day)
-    // 4
+
     let month = currentDate.getMonth();
     // console.log(month)
-    // 9
+
     let date = currentDate.getDate();
     // console.log(date)
-    // 21
+
     let year = currentDate.getFullYear();
     // console.log(year)
-    // 2021
 
     let monthList = [
         "Jan",
@@ -47,11 +46,9 @@ function currentDate() {
     // day & month will serve as the index
     let updatedDay = dayList[day];
     // console.log(updatedDay);
-    // Thu
 
     let updatedMonth = monthList[month];
     // console.log(updatedMonth);
-    // Oct
     
     let displayDate = document.getElementById('displayDate');
 
@@ -63,20 +60,24 @@ function currentDate() {
                             " " +
                             year;
 
+    // STEP 2 - fetch API
     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=14.599512&lon=120.984222&exclude=current,minutely,hourly,alerts&units=metric&appid=67e1ee4b132ec689f22552812006e566`)
 
     .then(Response=>Response.json())
 
     .then(data => {
+        // i is the index
         let i = 0;
         let tableBody = document.getElementById('tableBody');
 
         while (i < 8) {
+            // loop through the data's index
             let dailyTemp = data['daily'][i]['temp']['day'];
             
             let newDay = dayList[day];
-            console.log(newDay);
+            // console.log(newDay);
 
+            // insert a new row every loop
             let rowTemplate = 
             `<tr>
                 <td>${newDay},</td>
@@ -88,53 +89,29 @@ function currentDate() {
 
             tableBody.innerHTML = tableBody.innerHTML + rowTemplate;
 
+            // index must increment
             i++;
 
-            console.log("This is the daily temp: " + dailyTemp + "℃");
+            // Daily Temp
+            // console.log("This is the daily temp: " + dailyTemp + "℃");
 
+            // Updating of day
+            // if the index is less than 6, increment, else, reset to 0
             if (day < 6) {
                 newDay = dayList[day++];
             } else {
                 day = 0;
             }
-
-            console.log("This is the day updating: " + day);
+            // console.log("This is the day updating: " + newDay);
             
+            // Updating of date
+            // if the integer is less than 31, increment, else restart to 1 (ONLY FOR OCTOBER)
             if (date < 31) {
                 date++;
             } else {
                 date = 1;
             }
-            
-            console.log("This is the date updating: " + date);
-
+            // console.log("This is the date updating: " + date);
         };
     });
-
 };
-
-// function forecast() {
-    // fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=14.599512&lon=120.984222&exclude=current,minutely,hourly,alerts&units=metric&appid=67e1ee4b132ec689f22552812006e566`)
-
-    // .then(Response=>Response.json())
-
-    // .then(data => {
-    //     let i = 0;
-    //     let tableBody = document.getElementById('tableBody');
-
-    //     while (i < 7) {
-    //         let dailyTemp = data['daily'][i]['temp']['day'];
-
-    //         let rowTemplate = 
-    //         `<tr>
-    //             <td>${dailyTemp}℃</td>
-    //         </tr>`;
-
-    //         tableBody.innerHTML = tableBody.innerHTML + rowTemplate;
-
-    //         i++;
-
-    //         console.log(dailyTemp + "℃");
-    //     };
-    // });
-// };
